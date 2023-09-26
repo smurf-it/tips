@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tip Tracker</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Tip Calculator</h1>
+    <div class="input-container">
+        <label for="tip">Tip:</label>
+        <input type="number" id="tip" step="0.01">
+    </div>
+    <div class="button-container">
+        <button onclick="addTip()">Add Tip</button>
+        <button onclick="calculateSum()">Calculate Sum</button>
+    </div>
+    <p id="sum"></p>
+    <ul id="tipList"></ul>
+</body>
+</html>
