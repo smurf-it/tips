@@ -23,9 +23,13 @@ function addTip() {
 }
 
 function removeTip(index) {
+  var confirmation = confirm("Are you sure you want to remove the tip?");
+
+  if(confirmation) {
   tips.splice(index, 1);
   updateTipList();
   saveTipsToCookies();
+  }
 }
 
 function calculateSum() {
