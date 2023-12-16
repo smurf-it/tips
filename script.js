@@ -64,9 +64,13 @@ function saveTipsToCookies() {
 }
 
 function clearTips() {
+  var confirmation = confirm("Are you sure you want to clear the tip history? You will lose all your tips!");
+
+  if(confirmation) {
   tips = [];
   updateTipList();
   saveTipsToCookies();
+  }
 }
 
 // Helper function to get a cookie by name
