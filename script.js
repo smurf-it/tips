@@ -1,3 +1,6 @@
+/*-------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------*/
+
 
 var tips = [];
 
@@ -23,13 +26,9 @@ function addTip() {
 }
 
 function removeTip(index) {
-  var confirmation = confirm("Are you sure you want to remove the tip?");
-
-  if(confirmation) {
   tips.splice(index, 1);
   updateTipList();
   saveTipsToCookies();
-  }
 }
 
 function calculateSum() {
@@ -39,6 +38,7 @@ function calculateSum() {
 
   document.getElementById("sum").textContent = "Total Tips: €" + sum.toFixed(2);
 }
+
 
 function updateTipList() {
   var tipList = document.getElementById("tipList");
@@ -51,17 +51,31 @@ function updateTipList() {
     var span = document.createElement("span");
     span.textContent = "€" + tip.toFixed(2) + " (Order " + (index + 1) + ")";
 
-    var button = document.createElement("button");
-    button.textContent = "X";
-    button.onclick = function () {
+    var editButton = document.createElement("button");
+    editButton.innerHTML = '&#9999;';  // Pencil icon
+      editButton.onclick = function () {
+      var newTip = prompt("Enter the new tip amount:");
+      if (newTip !== null && !isNaN(newTip)) {
+        tips[index] = parseFloat(newTip);
+        updateTipList();
+        saveTipsToLocalStorage();
+      }
+    };
+
+    var deleteButton = document.createElement("button");
+    deleteButton.innerHTML = '&#10006;';  // X icon
+    deleteButton.onclick = function () {
       removeTip(index);
     };
 
     li.appendChild(span);
-    li.appendChild(button);
+    li.appendChild(editButton);
+    li.appendChild(deleteButton);
     tipList.appendChild(li);
   });
 }
+
+
 
 function saveTipsToCookies() {
   setCookie('tips', JSON.stringify(tips));
@@ -70,7 +84,8 @@ function saveTipsToCookies() {
 function clearTips() {
   var confirmation = confirm("Are you sure you want to clear the tip history? You will lose all your tips!");
 
-  if(confirmation) {
+  if (confirmation)
+  {
   tips = [];
   updateTipList();
   saveTipsToCookies();
@@ -93,3 +108,7 @@ function getCookie(name) {
 function setCookie(name, value) {
   document.cookie = name + '=' + value + '; path=/';
 }
+
+
+/*-------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------*/
