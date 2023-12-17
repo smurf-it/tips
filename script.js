@@ -26,9 +26,13 @@ function addTip() {
 }
 
 function removeTip(index) {
+  var confirmation = confirm("Are you sure you want to clear the tip history? You will lose all your tips!");
+
+  if (confirmation){
   tips.splice(index, 1);
   updateTipList();
   saveTipsToCookies();
+  }
 }
 
 function calculateSum() {
